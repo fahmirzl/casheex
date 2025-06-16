@@ -7,11 +7,11 @@ CREATE TABLE carts (
     selling_price INT NOT NULL,
     quantity INT NOT NULL,
     subtotal INT NOT NULL,
-    cashier_id INT NOT NULL,
+    user_id INT NOT NULL,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(id),
-    FOREIGN KEY (cashier_id) REFERENCES cashiers(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 )
 
 -- +migrate StatementEnd
