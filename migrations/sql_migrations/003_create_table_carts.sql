@@ -8,7 +8,7 @@ CREATE TABLE carts (
     quantity INT NOT NULL,
     subtotal INT NOT NULL,
     user_id INT NOT NULL,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (user_id) REFERENCES users(id)

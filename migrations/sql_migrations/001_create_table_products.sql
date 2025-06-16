@@ -7,7 +7,7 @@ CREATE TABLE products (
     stock INT NOT NULL,
     purchase_price INT NOT NULL,
     selling_price INT NOT NULL,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 )
 

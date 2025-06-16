@@ -8,7 +8,7 @@ CREATE TABLE transactions (
     total INT NOT NULL,
     paid INT NOT NULL,
     `change` INT NOT NULL,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 )
