@@ -8,6 +8,8 @@ CREATE TABLE transactions (
     total INT NOT NULL,
     paid INT NOT NULL,
     `change` INT NOT NULL,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
     FOREIGN KEY (cashier_id) REFERENCES cashiers(id)
 )
 
