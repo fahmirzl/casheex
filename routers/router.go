@@ -9,6 +9,7 @@ func StartServer() *gin.Engine {
 	AddUserRouter(api)
 	AddProductRouter(api)
 	AddCartRouter(api)
+	AddTransactionRouter(api)
 
 	return r
 }
