@@ -66,3 +66,9 @@ func DeleteProduct(dbParam *sql.DB, product *structs.Product) error {
 	}
 	return err
 }
+
+func DeductStockOnTransaction(dbParam *sql.DB, user *structs.User) error {
+	sqlStatement := "UPDATE products INNER JOIN carts ON carts.product_id = products.id SET products.stock = products.stock - carts.quantity WHERE carts.user_id = ?"
+	_, err := dbParam.Exec(sqlStatement, user.ID)
+	return err
+}
