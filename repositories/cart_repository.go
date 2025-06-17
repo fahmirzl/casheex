@@ -66,3 +66,9 @@ func DeleteProductFromCart(dbParam *sql.DB, cart *structs.Cart) error {
 	}
 	return err
 }
+
+func TruncateCart(dbParam *sql.DB, user *structs.User) error {
+	sqlStatement := "DELETE FROM carts WHERE user_id = ?"
+	_, err := dbParam.Exec(sqlStatement, user.ID)
+	return err
+}
