@@ -7,6 +7,7 @@ func StartServer() *gin.Engine {
 	api := r.Group("/api")
 
 	AddUserRouter(api)
-	
+	AddProductRouter(api)
+
 	return r
 }
