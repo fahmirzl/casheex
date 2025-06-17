@@ -1,7 +1,7 @@
 -- +migrate Up
 -- +migrate StatementBegin
 
-CREATE TABLE detail_transactions (
+CREATE TABLE transaction_details (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
     purchase_price INT NOT NULL,
