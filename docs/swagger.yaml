@@ -1,0 +1,713 @@
+basePath: /
+definitions:
+  structs.Cart:
+    properties:
+      created_at: {}
+      id:
+        type: integer
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+      selling_price:
+        type: integer
+      subtotal:
+        type: integer
+      updated_at: {}
+      user_id:
+        type: integer
+    type: object
+  structs.Credentials:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  structs.Product:
+    properties:
+      created_at: {}
+      id:
+        type: integer
+      name:
+        type: string
+      purchase_price:
+        type: integer
+      selling_price:
+        type: integer
+      stock:
+        type: integer
+      updated_at: {}
+    type: object
+  structs.Response:
+    properties:
+      data: {}
+      error: {}
+      message:
+        type: string
+    type: object
+  structs.Transaction:
+    properties:
+      change:
+        type: integer
+      created_at: {}
+      date: {}
+      id:
+        type: integer
+      paid:
+        type: integer
+      total:
+        type: integer
+      updated_at: {}
+      user_id:
+        type: integer
+    type: object
+  structs.User:
+    properties:
+      created_at: {}
+      gender:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      updated_at: {}
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Casheex is a simple RESTful API for a casheer system, designed to support
+    basic cashier operations in retail or small business environments.
+  title: Casheex
+  version: "1.0"
+paths:
+  /api/cart:
+    get:
+      description: Retrieve all cart items for the authenticated user, including product
+        information
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Get user's cart
+      tags:
+      - Cart
+    post:
+      consumes:
+      - application/json
+      description: Add a product to the authenticated user's cart
+      parameters:
+      - description: Cart Data
+        in: body
+        name: cart
+        required: true
+        schema:
+          $ref: '#/definitions/structs.Cart'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Add product to cart
+      tags:
+      - Cart
+  /api/cart/{id}:
+    delete:
+      description: Remove a product from the authenticated user's cart by cart ID
+      parameters:
+      - description: Cart ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Remove product from cart
+      tags:
+      - Cart
+  /api/products:
+    get:
+      description: Retrieve a list of all products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all products
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Store a new product into the database
+      parameters:
+      - description: Product Data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/structs.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new product
+      tags:
+      - Products
+  /api/products/{id}:
+    delete:
+      description: Delete a product by ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete a product
+      tags:
+      - Products
+    get:
+      description: Get a product detail by its ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Find product by ID
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Update an existing product by ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product Data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/structs.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a product
+      tags:
+      - Products
+  /api/transactions:
+    get:
+      description: Retrieve a list of transactions filtered by optional date for the
+        authenticated user
+      parameters:
+      - description: Date filter in format yyyy-mm-dd
+        in: query
+        name: date
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Get user's transaction history
+      tags:
+      - Transaction
+    post:
+      consumes:
+      - application/json
+      description: Process the transaction and store it in the database
+      parameters:
+      - description: Transaction Data
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/structs.Transaction'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new transaction
+      tags:
+      - Transaction
+  /api/transactions/all:
+    get:
+      description: Retrieve all transactions, optionally filtered by date
+      parameters:
+      - description: Date filter in format yyyy-mm-dd
+        in: query
+        name: date
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all transactions (admin)
+      tags:
+      - Transaction
+  /api/transactions/profit:
+    get:
+      description: Retrieve profit summary between start_date and end_date
+      parameters:
+      - description: Start date in format yyyy-mm-dd
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: End date in format yyyy-mm-dd
+        in: query
+        name: end_date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Calculate profit within date range
+      tags:
+      - Transaction
+  /api/users:
+    get:
+      description: Retrieve a list of all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Get all users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Store a new user into the database
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/structs.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Create a new user
+      tags:
+      - Users
+  /api/users/{id}:
+    delete:
+      description: Delete a user by their ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete user
+      tags:
+      - Users
+    get:
+      description: Retrieve a user by their ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Find user by ID
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update user data by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated user data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/structs.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/structs.Response'
+      security:
+      - BearerAuth: []
+      summary: Update a user
+      tags:
+      - Users
+  /api/users/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return JWT token
+      parameters:
+      - description: User credentials
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/structs.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Response'
+      summary: User login
+      tags:
+      - Auth
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

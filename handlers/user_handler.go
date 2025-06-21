@@ -12,6 +12,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Login godoc
+// @Summary User login
+// @Description Authenticate user and return JWT token
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param user body structs.Credentials true "User credentials"
+// @Success 200 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Router /api/users/login [post]
 func Login(c *gin.Context) {
 	var user structs.User
 
@@ -45,6 +56,16 @@ func Login(c *gin.Context) {
 	})
 }
 
+// UserIndex godoc
+// @Summary      Get all users
+// @Description  Retrieve a list of all users
+// @Tags         Users
+// @Produce      json
+// @Security     BearerAuth
+// @Success      200  {object}  structs.Response
+// @Failure      500  {object}  structs.Response
+// @Failure      401  {object}  structs.Response
+// @Router       /api/users [get]
 func UserIndex(c *gin.Context) {
 	users, err := repositories.GetAllUser(configs.DB)
 	if err != nil {
@@ -65,6 +86,20 @@ func UserIndex(c *gin.Context) {
 	})
 }
 
+// UserStore godoc
+// @Summary      Create a new user
+// @Description  Store a new user into the database
+// @Tags         Users
+// @Accept       json
+// @Produce      json
+// @Security     BearerAuth
+// @Param        user  body      structs.User  true  "User data"
+// @Success      200   {object}  structs.Response
+// @Failure      400   {object}  structs.Response
+// @Failure      422   {object}  structs.Response
+// @Failure      500   {object}  structs.Response
+// @Failure      401   {object}  structs.Response
+// @Router       /api/users [post]
 func UserStore(c *gin.Context) {
 	var user structs.User
 
@@ -125,6 +160,18 @@ func UserStore(c *gin.Context) {
 	})
 }
 
+// UserFind godoc
+// @Summary      Find user by ID
+// @Description  Retrieve a user by their ID
+// @Tags         Users
+// @Produce      json
+// @Security     BearerAuth
+// @Param        id   path      int  true  "User ID"
+// @Success      200  {object}  structs.Response
+// @Failure      404  {object}  structs.Response
+// @Failure      500  {object}  structs.Response
+// @Failure      401  {object}  structs.Response
+// @Router       /api/users/{id} [get]
 func UserFind(c *gin.Context) {
 	var user structs.User
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -159,6 +206,22 @@ func UserFind(c *gin.Context) {
 	})
 }
 
+// UserUpdate godoc
+// @Summary      Update a user
+// @Description  Update user data by ID
+// @Tags         Users
+// @Accept       json
+// @Produce      json
+// @Security     BearerAuth
+// @Param        id    path      int           true  "User ID"
+// @Param        user  body      structs.User  true  "Updated user data"
+// @Success      200   {object}  structs.Response
+// @Failure      400   {object}  structs.Response
+// @Failure      404   {object}  structs.Response
+// @Failure      422   {object}  structs.Response
+// @Failure      500   {object}  structs.Response
+// @Failure      401   {object}  structs.Response
+// @Router       /api/users/{id} [put]
 func UserUpdate(c *gin.Context) {
 	var user structs.User
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -229,6 +292,18 @@ func UserUpdate(c *gin.Context) {
 	})
 }
 
+// UserDestroy godoc
+// @Summary      Delete user
+// @Description  Delete a user by their ID
+// @Tags         Users
+// @Produce      json
+// @Security     BearerAuth
+// @Param        id   path      int  true  "User ID"
+// @Success      200  {object}  structs.Response
+// @Failure      404  {object}  structs.Response
+// @Failure      500  {object}  structs.Response
+// @Failure      401  {object}  structs.Response
+// @Router       /api/users/{id} [delete]
 func UserDestroy(c *gin.Context) {
 	var user structs.User
 	id, _ := strconv.Atoi(c.Param("id"))

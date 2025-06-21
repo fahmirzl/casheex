@@ -12,6 +12,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ProductIndex godoc
+// @Summary Get all products
+// @Description Retrieve a list of all products
+// @Tags Products
+// @Security BearerAuth
+// @Produce json
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/products [get]
 func ProductIndex(c *gin.Context) {
 	products, err := repositories.GetAllProduct(configs.DB)
 	if err != nil {
@@ -32,6 +42,20 @@ func ProductIndex(c *gin.Context) {
 	})
 }
 
+// ProductStore godoc
+// @Summary Create a new product
+// @Description Store a new product into the database
+// @Tags Products
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param product body structs.Product true "Product Data"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 422 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/products [post]
 func ProductStore(c *gin.Context) {
 	var product structs.Product
 
@@ -88,6 +112,18 @@ func ProductStore(c *gin.Context) {
 	})
 }
 
+// ProductFind godoc
+// @Summary Find product by ID
+// @Description Get a product detail by its ID
+// @Tags Products
+// @Security BearerAuth
+// @Produce json
+// @Param id path int true "Product ID"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 404 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/products/{id} [get]
 func ProductFind(c *gin.Context) {
 	var product structs.Product
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -121,6 +157,21 @@ func ProductFind(c *gin.Context) {
 	})
 }
 
+// ProductUpdate godoc
+// @Summary Update a product
+// @Description Update an existing product by ID
+// @Tags Products
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param id path int true "Product ID"
+// @Param product body structs.Product true "Product Data"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 404 {object} structs.Response
+// @Failure 422 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/products/{id} [put]
 func ProductUpdate(c *gin.Context) {
 	var product structs.Product
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -188,6 +239,18 @@ func ProductUpdate(c *gin.Context) {
 	})
 }
 
+// ProductDestroy godoc
+// @Summary Delete a product
+// @Description Delete a product by ID
+// @Tags Products
+// @Security BearerAuth
+// @Produce json
+// @Param id path int true "Product ID"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 404 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/products/{id} [delete]
 func ProductDestroy(c *gin.Context) {
 	var product structs.Product
 	id, _ := strconv.Atoi(c.Param("id"))

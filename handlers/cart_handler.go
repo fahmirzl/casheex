@@ -13,6 +13,16 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
+// CartIndex godoc
+// @Summary Get user's cart
+// @Description Retrieve all cart items for the authenticated user, including product information
+// @Tags Cart
+// @Security BearerAuth
+// @Produce json
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/cart [get]
 func CartIndex(c *gin.Context) {
 	var cart structs.Cart
 	claims := c.MustGet("claims").(jwt.MapClaims)
@@ -46,6 +56,20 @@ func CartIndex(c *gin.Context) {
 	})
 }
 
+// AddToCart godoc
+// @Summary Add product to cart
+// @Description Add a product to the authenticated user's cart
+// @Tags Cart
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param cart body structs.Cart true "Cart Data"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 422 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/cart [post]
 func AddToCart(c *gin.Context) {
 	var cart structs.Cart
 	claims := c.MustGet("claims").(jwt.MapClaims)
@@ -115,6 +139,18 @@ func AddToCart(c *gin.Context) {
 	})
 }
 
+// RemoveFromCart godoc
+// @Summary Remove product from cart
+// @Description Remove a product from the authenticated user's cart by cart ID
+// @Tags Cart
+// @Security BearerAuth
+// @Produce json
+// @Param id path int true "Cart ID"
+// @Success 200 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 404 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/cart/{id} [delete]
 func RemoveFromCart(c *gin.Context) {
 	var cart structs.Cart
 	id, _ := strconv.Atoi(c.Param("id"))

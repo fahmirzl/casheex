@@ -12,6 +12,21 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
+// TransactionStore godoc
+// @Summary Create a new transaction
+// @Description Process the transaction and store it in the database
+// @Tags Transaction
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param transaction body structs.Transaction true "Transaction Data"
+// @Success 200 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 409 {object} structs.Response
+// @Failure 422 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/transactions [post]
 func TransactionStore(c *gin.Context) {
 	var transaction structs.Transaction
 	var cart structs.Cart
@@ -95,6 +110,18 @@ func TransactionStore(c *gin.Context) {
 	})
 }
 
+// TransactionList godoc
+// @Summary Get user's transaction history
+// @Description Retrieve a list of transactions filtered by optional date for the authenticated user
+// @Tags Transaction
+// @Security BearerAuth
+// @Produce json
+// @Param date query string false "Date filter in format yyyy-mm-dd"
+// @Success 200 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/transactions [get]
 func TransactionList(c *gin.Context) {
 	var user structs.User
 	claims := c.MustGet("claims").(jwt.MapClaims)
@@ -133,6 +160,18 @@ func TransactionList(c *gin.Context) {
 	})
 }
 
+// TransactionAll godoc
+// @Summary Get all transactions (admin)
+// @Description Retrieve all transactions, optionally filtered by date
+// @Tags Transaction
+// @Security BearerAuth
+// @Produce json
+// @Param date query string false "Date filter in format yyyy-mm-dd"
+// @Success 200 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/transactions/all [get]
 func TransactionAll(c *gin.Context) {
 	date := c.Query("date")
 
@@ -167,6 +206,19 @@ func TransactionAll(c *gin.Context) {
 	})
 }
 
+// Profit godoc
+// @Summary Calculate profit within date range
+// @Description Retrieve profit summary between start_date and end_date
+// @Tags Transaction
+// @Security BearerAuth
+// @Produce json
+// @Param start_date query string true "Start date in format yyyy-mm-dd"
+// @Param end_date query string true "End date in format yyyy-mm-dd"
+// @Success 200 {object} structs.Response
+// @Failure 400 {object} structs.Response
+// @Failure 401 {object} structs.Response
+// @Failure 500 {object} structs.Response
+// @Router /api/transactions/profit [get]
 func Profit(c *gin.Context) {
 	var profitResponse structs.ProfitResponse
 	startDate := c.Query("start_date")
