@@ -3,6 +3,8 @@
 
 Casheex adalah RESTful API sederhana untuk sistem kasir, cocok digunakan untuk skala toko retail kecil atau usaha mikro.
 
+![Casheex](swagger_docs.png)
+
 📍 Live Swagger UI:  
 [https://casheex-production.up.railway.app/swagger/index.html](https://casheex-production.up.railway.app/swagger/index.html)
 
