@@ -79,7 +79,7 @@ definitions:
       username:
         type: string
     type: object
-host: localhost:8080
+host: https://casheex-production.up.railway.app
 info:
   contact: {}
   description: Casheex is a simple RESTful API for a casheer system, designed to support

@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "https://casheex-production.up.railway.app",
     "basePath": "/",
     "paths": {
         "/api/cart": {
