@@ -30,6 +30,7 @@ Casheex adalah RESTful API sederhana untuk sistem kasir, cocok digunakan untuk s
 - **Golang** + **Gin Web Framework**
 - **Swagger (swaggo)** untuk dokumentasi API
 - **JWT Auth** untuk proteksi endpoint
+- **Godotenv** untuk .env environment
 - **MySQL** sebagai database (tergantung konfigurasi)
 
 ---
