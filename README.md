@@ -59,11 +59,11 @@ Password: demo
 
 Swagger UI tersedia untuk eksplorasi interaktif endpoint:
 ```
-[GET]    /api/products         -> Get all products  
-[POST]   /api/products         -> Create new product  
-[GET]    /api/products/{id}    -> Get product by ID  
-[PUT]    /api/products/{id}    -> Update product  
-[DELETE] /api/products/{id}    -> Delete product  
+[GET]    /api/products         -> Get all products
+[POST]   /api/products         -> Create new product (admin) 
+[GET]    /api/products/{id}    -> Get product by ID (admin) 
+[PUT]    /api/products/{id}    -> Update product (admin) 
+[DELETE] /api/products/{id}    -> Delete product (admin) 
 
 [GET]    /api/cart             -> Get cart items  
 [POST]   /api/cart             -> Add item to cart  
@@ -75,11 +75,11 @@ Swagger UI tersedia untuk eksplorasi interaktif endpoint:
 [GET]    /api/transactions/profit?start_date=...&end_date=... -> Get profit report  
 
 [POST]   /api/users/login      -> Login (get token)  
-[GET]    /api/users            -> Get all users  
-[POST]   /api/users            -> Create user  
-[GET]    /api/users/{id}       -> Get user by ID  
-[PUT]    /api/users/{id}       -> Update user  
-[DELETE] /api/users/{id}       -> Delete user  
+[GET]    /api/users            -> Get all users (admin) 
+[POST]   /api/users            -> Create user (admin) 
+[GET]    /api/users/{id}       -> Get user by ID (admin) 
+[PUT]    /api/users/{id}       -> Update user (admin) 
+[DELETE] /api/users/{id}       -> Delete user (admin) 
 ```
 
 ---
