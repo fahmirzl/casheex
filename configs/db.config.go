@@ -3,6 +3,7 @@ package configs
 import (
 	"database/sql"
 	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -20,6 +21,8 @@ const (
 )
 
 func DBConnection() {
+	LoadENV()
+
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE)
 	DB, err = sql.Open("mysql", dsn)
 	if err != nil {
