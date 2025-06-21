@@ -3,6 +3,7 @@ package configs
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -12,18 +13,10 @@ var (
 	err error
 )
 
-const (
-	DB_USERNAME = "root"
-	DB_PASSWORD = ""
-	DB_HOST     = "127.0.0.1"
-	DB_PORT     = "3306"
-	DB_DATABASE = "casheex"
-)
-
 func DBConnection() {
 	LoadENV()
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", os.Getenv("MYSQLUSER"), os.Getenv("MYSQLPASSWORD"), os.Getenv("MYSQLHOST"), os.Getenv("MYSQLPORT"), os.Getenv("MYSQLDATABASE"))
 	DB, err = sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)

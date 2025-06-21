@@ -4,6 +4,7 @@ import (
 	"casheex/configs"
 	"casheex/migrations"
 	"casheex/routers"
+	"os"
 )
 
 // @title Casheex
@@ -19,5 +20,5 @@ func main() {
 	migrations.DBMigrate()
 	defer configs.DB.Close()
 
-	routers.StartServer().Run(":8080")
+	routers.StartServer().Run(":" + os.Getenv("PORT"))
 }
