@@ -10,14 +10,18 @@ Casheex adalah RESTful API sederhana untuk sistem kasir, cocok digunakan untuk s
 
 ---
 
-## 🚀 Fitur Utama
+## 🚀 Fitur
 
-- Autentikasi JWT
-- Manajemen User (CRUD)
-- Manajemen Produk (CRUD)
-- Keranjang belanja (Cart)
-- Transaksi penjualan
-- Perhitungan Laba
+- 🔐 **Autentikasi & Autorisasi JWT** – login aman dengan token
+- 🛡️ **Protected Route dengan Middleware** – semua API dilindungi token
+- 🧑‍⚖️ **Role-Based Access Control (RBAC)** – dukungan role `admin` & `kasir`
+- 🔑 **MD5 Password Hash** – penyimpanan password yang terenkripsi
+- 👥 **Manajemen User (CRUD)** – tambah, edit, lihat, dan hapus akun pengguna
+- 📦 **Manajemen Produk (CRUD)** – kelola data produk beserta harga & stok
+- 🛒 **Keranjang Belanja (Cart)** – simpan item sebelum transaksi
+- 💰 **Transaksi Penjualan** – catat penjualan dengan detail
+- 📊 **Perhitungan Laba** – laporan untung/rugi berdasarkan periode
+
 
 ---
 
