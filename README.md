@@ -47,8 +47,8 @@ Authorization: Bearer <your_token>
 Gunakan akun berikut untuk login ke sistem:
 
 ```
-Username: demo
-Password: demo
+username: demo
+password: demo
 ```
 
 > Kamu bisa mengubah atau menambahkan user baru melalui endpoint `/api/users`.
